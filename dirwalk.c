@@ -53,7 +53,7 @@ int main(int argc, char ** argv) {
 
 
 char** add_file_descritpion(char** all_descriptions, int* size_desriptions, char* desription_name) {
-    //Функция перевыделения памяти с добавлением передаваемой строки//
+    
     *(size_desriptions) += 1;
     char** returned_array = realloc(all_descriptions, sizeof(char *) * (*(size_desriptions)));
 
@@ -61,16 +61,15 @@ char** add_file_descritpion(char** all_descriptions, int* size_desriptions, char
 
     strcpy(returned_array[*(size_desriptions) - 1], desription_name);
 
-    return returned_array; //Указатель с новым адресом лоц. памяти//
+    return returned_array;
 }
 
 int detect_true_flag(const char* check_flag) {
-    //Проверка вводимых флагов//
     if(!(strcmp("-f", check_flag))) return 1;
     if(!(strcmp("-l", check_flag))) return 2;
     if(!(strcmp("-d", check_flag))) return 3;
     if(!(strcmp("-s", check_flag))) return 4;
-    return -1; //Случай, если передан невалидный параметр//
+    return -1;
 }
 
 void loading_flags(struct SearchFlags* flags, int fork_argc, char** fork_argv) {
@@ -91,12 +90,11 @@ void loading_flags(struct SearchFlags* flags, int fork_argc, char** fork_argv) {
 
 void directory_files(char * actually_file_path, struct SearchFlags * search_flags, struct strings_path * main_path) {
     DIR* actual_open_folder = opendir(actually_file_path);
-
-    //Проверка на удачное открытие папки//
+    
     if(actual_open_folder == NULL) { 
         perror(INVALID_PATH);
         exit(EXIT_FAILURE);
-    }////////////////////////////////////
+    }
 
     struct dirent* actual_file = NULL;
 
